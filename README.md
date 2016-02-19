@@ -20,12 +20,6 @@ You can either use the links on Github or the command line git instructions belo
 $ git clone https://github.com/adplabs/adp-connection-python.git adp-connection-python
 ```
 
-or
-
-```sh
-$ git clone git@github.com:adplabs/adp-connection-python.git adp-connection-python
-```
-
 followed by
 
 ```sh
