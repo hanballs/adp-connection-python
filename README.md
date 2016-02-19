@@ -19,43 +19,60 @@ You can either use the links on Github or the command line git instructions belo
 ```sh
 $ git clone https://github.com/adplabs/adp-connection-python.git adp-connection-python
 ```
+
 or
+
 ```sh
 $ git clone git@github.com:adplabs/adp-connection-python.git adp-connection-python
 ```
+
 followed by
+
 ```sh
 $ cd adp-connection-python
 $ make setup
 $ make docs
 ```
+
 The make setup will also install the **requests** package along with a few other developer dependencies. The make docs will generate the docs and open up a browser displaying the main docs page. If you run into errors you may need to run the setup using sudo.
+
 ```sh
 $ sudo make setup
 $ make docs
 ```
 
 *Run the sample app*
+
 ```sh
 $ cd adp_connection/democlient
 $ python -u samapleApp.py
 ```
+
 This starts an HTTP server on port 8889 (this port must be unused to run the sample application). You can point your browser to http://localhost:8889. The sample app allows you to connect to the ADP test API Gateway using the **client_credentials** and **authorization_code** grant types.
+
 ***
+
 **Install from PyPI**
 
 Make sure you have **pip** installed. Then use the following commad to install the library.
+
 ```sh
 $ pip install adp_connection
 ```
+
 If you run into errors, you may need to install using sudo.
+
 ```sh
 $ sudo pip install adp_connection
 ```
+
 You should now be able to import adp_connection in your own applications.
+
 ***
+
 ## Examples
 ### Create Client Credentials ADP Connection
+
 ```python
 import sys
 from os import curdir, sep
@@ -110,7 +127,9 @@ except ConnectError as connecterr:
 except:
     print "Unexpected error:", str(sys.exc_info())
 ```
+
 ### Create Authorization Code ADP Connection
+
 ```python
 import sys
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
