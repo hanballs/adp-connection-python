@@ -18,55 +18,19 @@
 # express or implied.  See the License for the specific language
 # governing permissions and limitations under the License.
 
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
+from adpapiconnection import *
 
-# C extensions
-*.so
+logging.basicConfig(level=logging.DEBUG)
 
-# Distribution / packaging
-.Python
-env/
-bin/
-build/
-develop-eggs/
-dist/
-eggs/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+class ADPAPIConnectionFactory():
+    """ Creates a connection instance and returns either a
+    ClientCredentialsConnection or an AuthorizationCodeConnection
+    depending on the initialized connection configuration provided """
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.cache
-nosetests.xml
-coverage.xml
+    def __init__(self):
+        self.connection_objects = {'authorization_code': AuthorizationCodeConnection,
+                                   'client_credentials': ClientCredentialsConnection}
 
-# Translations
-*.mo
-
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
-
-# Rope
-.ropeproject
-
-# Django stuff:
-*.log
-*.pot
-
-# Sphinx documentation
-docs/_build/
+    def createConnection(self, connConfig):
+        return self.connection_objects[connConfig.getGrantType()](connConfig)
