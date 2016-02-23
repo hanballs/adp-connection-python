@@ -272,3 +272,57 @@ class httpHandler(BaseHTTPRequestHandler):
             self.send_error(404, 'File Not Found: %s' % self.path)
 ```
 
+## API Documentation ##
+
+Documentation on the individual API calls provided by the library is automatically generated from the library code. To generate the documentation, please complete the following steps:
+
+```
+make docs
+```
+
+The generated documentation can be viewed by opening adp_connection/docs/_build/html/index.html in your browser.
+
+## Tests ##
+
+Automated unit tests are available in tests folder. To run the tests, please complete the following steps.
+
+```
+make test
+```
+
+The above will also display code coverage information. To generate an html version of the code coverage report, please complete the following steps.
+
+```
+make coverage-html
+```
+
+The resulting report can be viewed by opening htmlcov/index.html in your browser.
+
+## Dependencies ##
+
+This library has the following **install** dependencies. These are installed automatically as part of the 'make setup' or 'pip install adp-connection' if they don't exist.
+
+* requests
+
+This library has the following **development/test** dependencies. These are installed automatically as part of the 'make setup' if they don't exist.
+
+* mock
+* nose
+* coverage
+* yanc
+* preggy
+* coveralls
+* sphinx
+ 
+## Contributing ##
+
+To contribute to the library, please generate a pull request. Before generating the pull request, please insure the following:
+
+1. Appropriate unit tests have been updated or created.
+2. Code coverage on the unit tests must be no less than 95%.
+3. Your code updates have been fully tested and linted with no errors.
+4. Update README.md and API documentation as appropriate.
+ 
+## License ##
+
+This library is available under the Apache 2 license (http://www.apache.org/licenses/LICENSE-2.0).
