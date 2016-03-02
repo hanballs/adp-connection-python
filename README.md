@@ -8,7 +8,7 @@ There are two ways of installing and using this library:
   - Install from PyPI: When you are ready to use the library in your own application use this method to install it using pip
 
 ### Version
-1.0.0
+1.0.0 (Beta)
 
 ### Installation
 
@@ -320,7 +320,7 @@ To contribute to the library, please generate a pull request. Before generating 
 
 1. Appropriate unit tests have been updated or created.
 2. Code coverage on the unit tests must be no less than 95%.
-3. Your code updates have been fully tested and linted with no errors.
+3. Your code updates have been fully tested.
 4. Update README.md and API documentation as appropriate.
  
 ## License ##
