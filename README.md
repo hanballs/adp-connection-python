@@ -8,7 +8,7 @@ There are two ways of installing and using this library:
   - Install from PyPI: When you are ready to use the library in your own application use this method to install it using pip
 
 ### Version
-1.0.0
+1.0.1
 
 ### Installation
 

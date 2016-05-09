@@ -23,6 +23,7 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from urlparse import urlparse, parse_qs
 from os import curdir, sep
 from adp_connection.lib import *
+from adp_connection import __version__
 
 PORT_NUMBER = 8889
 
@@ -261,7 +262,7 @@ try:
     # Create a web server and define the handler to manage the
     # incoming request
     server = HTTPServer(('', PORT_NUMBER), httpHandler)
-    print 'Started httpserver on port ', PORT_NUMBER
+    print 'adp-connection-python version ' + __version__ + ' started httpserver on port ', PORT_NUMBER
 
     # Wait forever for incoming htto requests
     server.serve_forever()

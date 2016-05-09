@@ -24,6 +24,7 @@ import uuid
 import logging
 from connectexceptions import *
 from connectionconfiguration import *
+from adp_connection import __version__
 
 
 class ADPAPIConnection(object):
@@ -37,6 +38,7 @@ class ADPAPIConnection(object):
     connection = {'status': 'availabe', 'type': 'unknown', 'token': '',
                   'expires': '', 'sessionState': ''}
     connectionConfiguration = None
+    userAgent = 'adp-userinfo-python/' + __version__
 
     def isConnectedIndicator(self):
         """ Returns: a boolen depending on whether the connection
@@ -85,7 +87,9 @@ class ADPAPIConnection(object):
             raise ConfigError(self.__class__.__name__, Error.errDict['initBad']['errCode'], Error.errDict['initBad']['errMsg'])
         else:
             formData = {'grant_type': self.getConfig().getGrantType()}
+            headers = {'user-agent': self.userAgent}
             r = requests.post(self.getConfig().getTokenServerURL(),
+                              headers=(headers),
                               cert=(self.getConfig().getSSLCertPath(),
                                     self.getConfig().getSSLKeyPath()),
                               auth=(self.getConfig().getClientID(),
@@ -106,7 +110,9 @@ class ADPAPIConnection(object):
         """ Sends a logout request to ADP if an access-token is present
         and resets the connection instance variable for the connection """
         if self.getAccessToken() != '':
-            r = requests.get(self.getConfig().getDisconnectURL() + '?id_token_hint=' + self.getAccessToken())
+            headers = {'user-agent': self.userAgent}            
+            r = requests.get(self.getConfig().getDisconnectURL() + '?id_token_hint=' + self.getAccessToken(),
+                             headers=(headers))
             logging.debug(r.status_code)
         self.connection = {'status': 'ready', 'type': 'unknown', 'token': '',
                            'expires': '', 'state': ''}
@@ -172,15 +178,19 @@ class AuthorizationCodeConnection(ADPAPIConnection):
         if self.getConfig().initDone is False:
             logging.debug('connecting without config init')
             raise ConfigError(self.__class__.__name__, Error.errDict['initBad']['errCode'], Error.errDict['initBad']['errMsg'])
+
+        headers = {'user-agent': self.userAgent}
         formData = {'client_id': self.getConfig().getClientID(),
                     'client_secret': self.getConfig().getClientSecret(),
                     'grant_type': self.getConfig().getGrantType(),
                     'code': self.getConfig().getAuthorizationCode(),
                     'redirect_uri': self.getConfig().getRedirectURL()}
         r = requests.post(self.getConfig().getTokenServerURL(),
+                          headers=(headers),
                           cert=(self.getConfig().getSSLCertPath(),
                                 self.getConfig().getSSLKeyPath()),
-                          data=(formData))
+                          data=(formData),
+                          verify=(self.getConfig().getSSLCertPath()))
         logging.debug(r.status_code)
         logging.debug(r.json())
         if (r.status_code == requests.codes.ok):
